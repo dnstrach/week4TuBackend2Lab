@@ -8,9 +8,10 @@ app.use(cors())
 
 app.listen(4004, () => console.log('Server is running on port 4004'))
 
-const {getHouses, createHouse, updateHouse, deleteHouse} = require("./controller.js")
+const {getHouses, deleteHouse, createHouse, updateHouse} = require("./controller.js")
 
 app.get('/api/houses', getHouses)
+app.delete('/api/houses/:id', deleteHouse)
 app.post('/api/houses', createHouse)
 app.put('/api/houses/:id', updateHouse)
-app.delete('/api/houses/:id', deleteHouse)
+

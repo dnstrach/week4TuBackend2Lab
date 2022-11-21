@@ -2,20 +2,31 @@ const houses = require('./db.json')
 let globalId = 4
 
 module.exports = {
+    //get
     getHouses: (req, res) => {
         res.status(200).send(houses)
     },
 
+    //delete
     deleteHouse: (req, res) => {
+        //console.log(req.params)
+        //res.status(200)
+        // { id: '1'}
+
         let index = houses.findIndex(house => house.id === +req.params.id)
-        //console.log(index) // shows in browser's console
+        //console.log(index) 
 
         houses.splice(index, 1)
 
-        res.sendStatus(200).send(houses)
+        res.status(200).send(houses)
     },
 
+    //post
     createHouse: (req, res) => {
+        //console.log(req.body)
+        //missing id
+
+        //destructure body to use keys
         const {address, price, imageURL} = req.body 
 
         let newHouse = {
@@ -26,13 +37,16 @@ module.exports = {
         }
 
         houses.push(newHouse)
-        //console.log(req)
 
         res.status(200).send(newHouse)
         globalId++
     },
 
+    //put
     updateHouse: (req, res) => {
+        // console.log(req.body)
+        // console.log(req.param)
+      
         let {type} = req.body
         let {id} = req.params
 
